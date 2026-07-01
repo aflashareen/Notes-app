@@ -6,7 +6,7 @@ function NotesInp({ setNotes }) {
     const [color, setColor] = useState("#4B5563");
 
     const handleAdd = () => {
-        if (!title.trim() && !body.trim()) return;
+        if (!body.trim()) return;
 
         setNotes((prev) => [...prev, { title, body, color,},]);
 
@@ -22,8 +22,9 @@ function NotesInp({ setNotes }) {
                     (<input
                         className="w-full p-2 bg-gray-600 border text-white placeholder:text-white"
                         type="text"
-                        placeholder="Title"
+                        placeholder="Title (Optional)"
                         value={title}
+                        maxLength={100}
                         onChange={(e) => setTitle(e.target.value)} />
                     )}
                 <textarea

@@ -1,12 +1,37 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NoteApp from './NoteApp'
 import NotesInp from './NotesInp'
 import NotesList from './NotesList'
 import NotesArchive from './NotesArchive'
 
-
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(() => {
+  const saved = localStorage.getItem("notes");
+  return saved ? JSON.parse(saved) : [];
+});
+  const [editIndex, setEditIndex] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editBody, setEditBody] = useState("");
+
+  const [archivedNotes, setArchivedNotes] = useState(() => {
+  const saved = localStorage.getItem("archivedNotes");
+  return saved ? JSON.parse(saved) : [];
+  });
+  
+  const [showArchive, setShowArchive] = useState(false);
+
+
+useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
+useEffect(() => {
+  localStorage.setItem(
+    "archivedNotes",
+    JSON.stringify(archivedNotes)
+  );
+}, [archivedNotes]);
+
 
   const deleteNote = (index) => {
     setNotes((prev) => prev.filter((_, i) => i !== index))
@@ -33,11 +58,7 @@ function App() {
     setArchivedNotes((prev) => prev.filter((_, i) => i !== index));
   }
 
-  const [editIndex, setEditIndex] = useState(null);
-  const [editTitle, setEditTitle] = useState("");
-  const [editBody, setEditBody] = useState("");
-  const [archivedNotes, setArchivedNotes] = useState([]);
-  const [showArchive, setShowArchive] = useState(false);
+ 
   
 
   return (

@@ -3,17 +3,16 @@ function NotesInp({ setNotes }) {
     const [expanded, setExpanded] = useState(false);
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    
+    const [color, setColor] = useState("#4B5563");
+
     const handleAdd = () => {
-        console.log("Title:", title)
-        console.log("Body:", body)
+        if (!title.trim() && !body.trim()) return;
 
-        if(!title.trim() && !body.trim()) return;
-
-        setNotes((prev) => [...prev, {title,body,},]);
+        setNotes((prev) => [...prev, { title, body, color,},]);
 
         setTitle("");
         setBody("");
+        setColor("#4B5563")
         setExpanded(false);
     }
     return (
@@ -32,9 +31,15 @@ function NotesInp({ setNotes }) {
                     placeholder="Take a note..."
                     value={body}
                     onFocus={() => setExpanded(true)}
-                    onChange={(e)=> setBody(e.target.value)}
+                    onChange={(e) => setBody(e.target.value)}
                 ></textarea>
                 {expanded && <button type="button" className="text-white border" onClick={handleAdd}>Add</button>}
+                <input
+                    type="color"
+                    value={color}
+                    onChange={(e) => setColor(e.target.value)}
+                    className="w-10 h-10 mt-2 cursor-pointer"
+                />
             </div>
         </div>
     )

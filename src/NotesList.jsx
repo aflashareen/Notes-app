@@ -10,6 +10,7 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
     <div className="flex flex-wrap gap-4 mt-5 ml-5">
       {notes.map((note, index) => (
         <div key={index}
+        style={{backgroundColor: note.color }}
           className="w-64 p-4 border border-white/20 rounded bg-white/10 backdrop-blur-md shadow-lg text-white transition duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
           {editingIndex === index ? (
             <>
@@ -76,7 +77,7 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
              Archive
           </button>
 
-          
+
 
         </div>
       ))}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
+function NotesList({ notes, deleteNote, editNote, archiveNote, pinNote }) {
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTitle, setEditedTitle] = useState("");
@@ -10,7 +10,7 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
     <div className="flex flex-wrap gap-4 mt-5 ml-5">
       {notes.map((note, index) => (
         <div key={index}
-        style={{backgroundColor: note.color }}
+          style={{ backgroundColor: note.color }}
           className="w-64 p-4 border border-white/20 rounded bg-white/10 backdrop-blur-md shadow-lg text-white transition duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
           {editingIndex === index ? (
             <>
@@ -29,12 +29,13 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
               <button
                 onClick={() => {
                   editNote(index, {
+                    ...note,
                     title: editedTitle,
                     body: editedBody,
                   });
                   setEditingIndex(null);
                 }}
-                className="text-green-400 mr-3"
+                className="text-blue-400 mr-3 hover:text-green-400"
               >
                 Save
               </button>
@@ -49,7 +50,8 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
           ) : (
             <>
               <h2 className="font-bold mb-2">{note.title}</h2>
-              <p className="text-sm opacity-90">{note.body}</p>
+              <p className="text-sm opacity-90 mb-2">{note.body}</p>
+              {/* <p>{String(note.isPinned)}</p> */}
 
               <button
                 onClick={() => {
@@ -61,24 +63,29 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, }) {
               >
                 Edit
               </button>
+
+              <button
+                onClick={() => deleteNote(index)}
+                className=" text-red-600 hover:text-red-400"
+              >
+                Delete
+              </button>
+
+              <button
+                onClick={() => archiveNote(index)}
+                className="text-yellow-600 hover:text-yellow-400 ml-2"
+              >
+                Archive
+              </button>
+
+              <button
+                onClick={() => pinNote(index)}
+
+                className="absolute top-1 right-2">
+                📌
+                </button>
             </>
           )}
-          <button
-            onClick={() => deleteNote(index)}
-            className="absolute top-2 right-2 text-red-400 hover:text-red-600"
-          >
-            ✕
-          </button>
-
-          <button
-            onClick={() => archiveNote(index)}
-            className="text-yellow-400 hover:text-yellow-500"
-          >
-             Archive
-          </button>
-
-
-
         </div>
       ))}
     </div>

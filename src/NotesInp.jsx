@@ -8,7 +8,8 @@ function NotesInp({ setNotes }) {
     const handleAdd = () => {
         if (!body.trim()) return;
 
-        setNotes((prev) => [...prev, { title, body, color,},]);
+        setNotes((prev) => [...prev, { title, body, color,  isPinned: false 
+},]);
 
         setTitle("");
         setBody("");

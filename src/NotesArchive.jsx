@@ -11,7 +11,7 @@ function NotesArchive({ archivedNotes, unarchiveNote }) {
           <p>{note.body}</p>
 
           <button onClick={() => unarchiveNote(index)}
-           className="mt-3 px-3 py-1 bg-green-500 rounded hover:bg-green-600" >Unarchive</button>
+           className="mt-3 px-3 py-1 bg-blue-500 rounded hover:bg-green-600" >Unarchive</button>
         </div>
       ))}
     </div>

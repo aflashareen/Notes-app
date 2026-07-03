@@ -66,14 +66,14 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, pinNote }) {
 
               <button
                 onClick={() => deleteNote(index)}
-                className=" text-red-600 hover:text-red-400"
+                className=" text-red-400 hover:text-red-600"
               >
                 Delete
               </button>
 
               <button
                 onClick={() => archiveNote(index)}
-                className="text-yellow-600 hover:text-yellow-400 ml-2"
+                className="text-yellow-400 hover:text-yellow-600 ml-2"
               >
                 Archive
               </button>
@@ -81,7 +81,7 @@ function NotesList({ notes, deleteNote, editNote, archiveNote, pinNote }) {
               <button
                 onClick={() => pinNote(index)}
 
-                className="absolute top-1 right-2">
+                className="absolute top-1 right-1">
                 📌
                 </button>
             </>
